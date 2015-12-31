@@ -1,0 +1,30 @@
+{
+  "name": "luhn-string",
+  "version": "1.0.0",
+  "description": "A library to generate strings that end with a checksum 'digit'. Digits in the string are in the range 0-9B-DF-HJ-NP-TV-XZ. All uppercase.",
+  "main": "luhn-string.js",
+  "scripts": {
+    "test": "node test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Eidetic-Limited/luhn-string.git"
+  },
+  "keywords": [
+    "luhn",
+    "string",
+    "random",
+    "checksum",
+    "valid",
+    "validate",
+    "invalid",
+    "before",
+    "next"
+  ],
+  "author": "Ibrahim Lawal",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Eidetic-Limited/luhn-string/issues"
+  },
+  "homepage": "https://github.com/Eidetic-Limited/luhn-string#readme"
+}
