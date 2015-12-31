@@ -1,15 +1,16 @@
 'use strict';
+
 var crypto = require('crypto');
 
 function randomString(length, chars) {
   if (!chars) {
-    throw new Error('Argument \'chars\' is undefined');
+     throw new Error('Argument \'chars\' is undefined');
   }
 
   var charsLength = chars.length;
   if (charsLength > 256) {
-    throw new Error('Argument \'chars\' should not have more than 256 characters'
-        + ', otherwise unpredictability will be broken');
+    throw new Error('Argument \'chars\' should not have more than 256 characters, '+
+                    'otherwise unpredictability will be broken');
   }
 
   var randomBytes = crypto.randomBytes(length);
@@ -36,7 +37,7 @@ function randomValidString(length) {
 
 function random(length, callback) {
   var k, r;
-  if (!(length === parseInt(length, 10))) {
+  if (length !== parseInt(length, 10)) {
     if (callback) {
       return callback(new Error('\'length\' must be a valid positive integer'), null);
     } else {
@@ -129,7 +130,6 @@ function bordinal(inte) {
     N: 20, P: 21, Q: 22, R: 23, S: 24,
     T: 25, V: 26, W: 27, X: 28, Z: 29}, i;
   if (isNaN(inte) || parseInt(inte) !== inte || parseInt(inte) > 29) {
-    console.log('Inte: ' + inte);
     throw new Error('Invalid Ordinal');
   } else {
     if (inte < 10) {
@@ -185,7 +185,7 @@ function addChecksum(r, callback) {
     }
   }
   r = r.toUpperCase();
-  var letters = /^[0-9B-DF-HJ-NP-TV-XZ]+$/, k, l;
+  var letters = /^[0-9B-DF-HJ-NP-TV-XZ]+$/, l;
   if (!letters.test(r)) {
     // invalid as there is an invalid character!
     if (callback) {
@@ -216,4 +216,4 @@ module.exports = {
   cryptoRandomAsciiString: randomAsciiString,
   cryptoRandomString: randomString,
   random: random
-}
+};

@@ -1,7 +1,10 @@
 # LUHN-STRING
 A library to generate alphanumeric strings that end with a checksum _"digit"_. _Digits_ in the string are in the range _0-9B-DF-HJ-NP-TV-XZ_. All uppercase.
 
-Advantage is that these strings have a checksum character at the end.
+#### Advantages 
+1. Strings have a checksum character at the end.
+2. Avoid Bad words in generated string by removing A,E,I,O,U,Y
+3. Random strings are cryptographically generated (dependent on node's crypto library)
 
 ## Installation
 ```terminal
