@@ -132,19 +132,6 @@ describe('addChecksum', function(){
      
   });
   
-  it('should be true for validly checksummed strings when a callback is supplied', function(done){
-     Luhn.check('27QNZBVKCLJK5X', function(error, result){
-       expect(result).to.be.true
-       Luhn.check('41ML4W5V', function(error, result){
-         expect(result).to.be.true
-         Luhn.check('9MBTBP42PL2W80P', function(error, result){
-           expect(result).to.be.true
-           done();
-         });
-       });
-     });
-  });
-  
 });
 
 
