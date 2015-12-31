@@ -50,3 +50,6 @@ returns a truly random ascii string of length _length_
 
 ### 2 cryptoRandomString(length, chars)
 returns a truly random ascii string of length _length_, picking characters in string _chars_
+
+### 3 addChecksum(str, callback)
+checks that str contains valid characters and appends a checksum character at its end. Should be used in callback fashion. Returns *null* if there is an error otherwise.
