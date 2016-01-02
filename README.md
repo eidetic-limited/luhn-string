@@ -8,7 +8,7 @@ A library to generate alphanumeric strings that end with a checksum _"digit"_. _
 
 ## Installation
 ```terminal
-npm install 'luhn-string' -save
+npm install luhn-string -save
 ```
 
 ## Usage
@@ -16,16 +16,13 @@ npm install 'luhn-string' -save
 var Luhn = require('luhn-string');
 
 // to generate a 16-digit checksummed string
-var res = Luhn.random(16);
-var str = res.result;
-var generationerror = res.error;
+var str = Luhn.random(16);
 
 // to test a string for checksum validity
 var chk = Luhn.check('LH989002BW3P');
 var valid = chk.result;
 var validityerror = chk.error;
 
-// Take advantage of asynchrous processing!
 // Use callbacks
 Luhn.random(16, function(error, result){
   if(error){

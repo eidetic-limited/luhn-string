@@ -1,3 +1,5 @@
+/* jshint expr: true */
+/* globals describe, it, require */
 'use strict';
 
 var Luhn = require('./luhn-string');
@@ -18,7 +20,7 @@ describe('cryptoRandomAsciiString', function() {
 
 describe('cryptoRandomString', function() {
   it('should return a string that has only characters that are in chars array', function() {
-    var i = 0, len, str, j, reducedstr;
+    var i = 0, len, str, j;
     for (i; i < 10; i++) {
       // length will be between 7 and 18
       len = Math.floor(Math.random() * (18 - 7 + 1)) + 7;
@@ -36,13 +38,13 @@ describe('cryptoRandomString', function() {
 describe('random', function() {
   it('should fail for non positive integers below 2', function() {
     expect(function() {
-      Luhn.random(1)
+      Luhn.random(1);
     }).to.throw();
     expect(function() {
-      Luhn.random('p')
+      Luhn.random('p');
     }).to.throw();
     expect(function() {
-      Luhn.random('8')
+      Luhn.random('8');
     }).to.throw();
   });
 
@@ -82,23 +84,23 @@ describe('check', function() {
   });
 
   it('should return true for validly checksummed strings', function() {
-    var chk = Luhn.check('27QNZBVKCLJK5X');
+    var chk = Luhn.check('KDL6ZR8JLBJM9DJ');
     expect(chk.result).to.be.true;
-    chk = Luhn.check('LH989002BW3P');
+    chk = Luhn.check('3RPQ75F4J');
     expect(chk.result).to.be.true;
-    chk = Luhn.check('8S0JX31CCVD7Q8R');
+    chk = Luhn.check('6DH051HT0VBQQDX');
     expect(chk.result).to.be.true;
-    chk = Luhn.check('NCGWVQ79B4899SV');
+    chk = Luhn.check('KPJD27SM');
     expect(chk.result).to.be.true;
 
   });
 
   it('should be true for validly checksummed strings when a callback is supplied', function (done) {
-    Luhn.check('27QNZBVKCLJK5X', function (error, result) {
+    Luhn.check('KDL6ZR8JLBJM9DJ', function (error, result) {
       expect(result).to.be.true;
-      Luhn.check('41ML4W5V', function (error, result) {
+      Luhn.check('3RPQ75F4J', function (error, result) {
         expect(result).to.be.true;
-        Luhn.check('9MBTBP42PL2W80P', function (error, result) {
+        Luhn.check('KPJD27SM', function (error, result) {
           expect(result).to.be.true;
           done();
         });
@@ -109,29 +111,32 @@ describe('check', function() {
 });
 
 describe('addChecksum', function() {
-  it('should fail for a string that is too short or has invalid characters(A,E,I,O,U,Y)', function() {
-    var chk = Luhn.addChecksum('BABA70!');
-    expect(chk).to.not.exist;
-    chk = Luhn.addChecksum('Baba70!');
-    expect(chk).to.not.exist;
-    chk = Luhn.addChecksum('uyete86');
-    expect(chk).to.not.exist;
-    chk = Luhn.addChecksum('');
-    expect(chk).to.not.exist;
+  it('should fail for a string that is too short or has invalid characters', function() {
+    expect(function(){Luhn.addChecksum('BABA70!');}).to.throw();
+    expect(function(){Luhn.addChecksum('uyete86');}).to.throw();
+    expect(function(){Luhn.addChecksum('');}).to.throw();
+  });
+
+  it('should fail for a string that is too short or has invalid characters '+
+     'when a string is used to specify the characters we want', function() {
+    expect(function(){Luhn.addChecksum('PCZ8W3HQ4N0XK', '01234567890');}).to.throw();
+    expect(function(){Luhn.addChecksum('uyete86', 'PCZ8W3HQ4N0XK');}).to.throw();
+    expect(function(){Luhn.addChecksum('', 'PCZ8W3HQ4N0XK');}).to.throw();
   });
 
   it('should return a string for strings with valid characters', function() {
-    var chk = Luhn.addChecksum('27QNZBVKCLJK5X');
+    var chk = Luhn.addChecksum('DW9S91FJLR24V5Z');
     expect(chk).to.be.a('string');
-    chk = Luhn.addChecksum('LH989002BW3P');
+    chk = Luhn.addChecksum('MTV3B5BR');
     expect(chk).to.be.a('string');
-    chk = Luhn.addChecksum('8S0JX31CCVD7Q8R');
+    chk = Luhn.addChecksum(Luhn.cryptoRandomString(10));
     expect(chk).to.be.a('string');
-    chk = Luhn.addChecksum('NCGWVQ79B4899SV');
+    chk = Luhn.addChecksum(Luhn.cryptoRandomString(10, '0123456789'), '0123456789');
+    expect(chk).to.be.a('string');
+    chk = Luhn.addChecksum('L449V3SKXQFP6ZQ515');
     expect(chk).to.be.a('string');
 
   });
 
 });
-
 

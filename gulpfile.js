@@ -1,3 +1,6 @@
+/* jshint expr: false */
+/* globals require */
+
 var gulp = require('gulp');
 var jshint = require('gulp-jshint');
 var wrapjs = require('gulp-wrap-js');

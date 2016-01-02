@@ -1,6 +1,26 @@
+/* jshint expr: false */
+/* globals require */
+'use strict';
+
 var Luhn = require('./luhn-string');
-var assert = require('assert');
 var chars='UYSHO*(EKJDGuihsdk8aBAzZ', len;
+
+console.log('On zero to nine');
+// to generate a 16-digit checksummed string
+var res = Luhn.random(16, '0123456789');
+console.log(res);
+console.log(Luhn.check(res, '0123456789'));
+
+try{
+  Luhn.addChecksum('Baba70!');
+} catch (err){
+  console.log(err);
+}
+
+// or call back
+Luhn.addChecksum('Baba70!', function(err, res){
+  console.log(err);
+});
 
 // create a random length between 7 and 18
 len = Math.floor(Math.random() * (18 - 7 + 1)) + 7;
@@ -19,13 +39,8 @@ for(var i=0;i<10;i++){
   console.log(Luhn.random(len));
 }
 
-// to generate a 16-digit checksummed string
-var res = Luhn.random(16);
-var str = res.result;
-var generationerror = res.error;
-
 // to test a string for checksum validity
-var chk = Luhn.check('LH989002BW3P');
+var chk = Luhn.check('DW9S91FJLR24V5Z');
 var valid = chk.result;
 var validityerror = chk.error;
 
@@ -39,7 +54,7 @@ Luhn.random(16, function(error, result){
   console.log(result);
 });
 
-Luhn.check('LH989002BW3P', function(error, result){
+Luhn.check('DW9S91FJLR24V5Z', function(error, result){
   if(error){
     // do something with error...
     return;
