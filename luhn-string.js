@@ -1,9 +1,9 @@
 /* jshint expr: false */
-/* globals require */
+/* globals require, module */
 'use strict';
 
 var crypto = require('crypto');
-const luhnValidChars = '0123456789BCDFGHJKLMNPQRSTVWXZ';
+var luhnValidChars = '0123456789BCDFGHJKLMNPQRSTVWXZ';
 
 function reverse(s) {
   // the reverser below is bad generally
@@ -19,8 +19,7 @@ function aordinal(str, validChars) {
 }
 
 function bordinal(inte, validChars) {
-  var i;
-  if (isNaN(inte) || parseInt(inte) !== inte || parseInt(inte) > (validChars.length - 1)) {
+  if (isNaN(inte) || parseInt(inte) !== inte || inte > (validChars.length - 1)) {
     throw new Error('Invalid Ordinal');
   } else {
     return validChars[inte].toUpperCase();
