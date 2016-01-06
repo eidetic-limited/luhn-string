@@ -1,6 +1,6 @@
 {
   "name": "luhn-string",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A library to generate strings that end with a checksum 'digit'. Digits in the string are in the range 0-9B-DF-HJ-NP-TV-XZ. All uppercase.",
   "main": "luhn-string.js",
   "scripts": {
