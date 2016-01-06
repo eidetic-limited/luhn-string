@@ -5,7 +5,7 @@ Changed in v1.2.0 > provide your own character sequence using ```var cardLuhn = 
 
 
 ## Change log
-1.2.0. Rather than having to send the valid caharacters sequence for every call, the main Luhn Object has been upgraded to be a factory for LuhnObjects. Check samples.js for updated samples
+1.2.0. Rather than having to send the valid caharacters sequence for every call, the main Luhn Object has been upgraded to be a factory for LuhnObjects. Check sample.js for updated samples
 
 1.1.0. All functions allow you specify a string of valid characters in case you do not want the default of 0-9A-Z excluding vowels and Y. Callbacks can still be sent. All results are still Uppercase.
 Note that the characters must be in same order when you are validating. A random string generated with sequence '0123456789' will not validate correctly against sequence '9876543210'.
