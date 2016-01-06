@@ -5,11 +5,36 @@
 var Luhn = require('./luhn-string');
 var chars='UYSHO*(EKJDGuihsdk8aBAzZ', len;
 
-console.log('On zero to nine');
-// to generate a 16-digit checksummed string
+// Now you can validate against a LuhnObject created by calling
+// the module with a string including the sequence you want.
+// Examples are below
+
+var vowelsLuhn = new Luhn('AEIOUY');
+var sample = vowelsLuhn.check('092');
+if(sample.error){
+  console.log( sample.error) ; //this should show a message telling you that there is an invalid digit encountered
+}
+
+var cardLuhn = new Luhn('0123456789');
+var sample2 = cardLuhn.check('BABA');
+if(sample2.error){
+  console.log( sample2.error) ; //this should show a message telling you that there is an invalid digit encountered
+}
+
+// to generate a 16-digit checksummed string with 0123456789 as sequence
+// Method 1
 var res = Luhn.random(16, '0123456789');
 console.log(res);
 console.log(Luhn.check(res, '0123456789'));
+
+// Method 2
+var creator = new Luhn('0123456789');
+res = creator.random(16);
+console.log(res);
+console.log(Luhn.check(res, '0123456789'));
+
+// Method 1 requires that you send the validchar array every time, however, with Method 2, 
+// you may call it along with the require or for each random string generator you need
 
 try{
   Luhn.addChecksum('Baba70!');
@@ -18,8 +43,9 @@ try{
 }
 
 // or call back
-Luhn.addChecksum('Baba70!', function(err, res){
+Luhn.addChecksum('522340230007083', '0123456789', function(err, res){
   console.log(err);
+  console.log(res);
 });
 
 // create a random length between 7 and 18

@@ -140,3 +140,23 @@ describe('addChecksum', function() {
 
 });
 
+describe('LuhnObject', function() {
+  it('should fail to instantiate a new LuhnObject object when invalid \'validchars\' are not sent', function() {
+    expect(function(){var r = new Luhn();}).to.throw();
+    expect(function(){var r = new Luhn(123456789);}).to.throw();
+    expect(function(){var r = new Luhn('');}).to.throw();
+    expect(function(){var r = new Luhn('1');}).to.throw();
+  });
+
+  it('should use validchars sent to instantiator when called, not default 0-9A-ZminusAEIOUY', function() {
+    var r = new Luhn('AEIOUY');
+    expect(function(){
+      var j = r.check('092');
+      if(j.error){
+        throw j.error;
+      }
+    }).to.throw();
+  });
+
+});
+

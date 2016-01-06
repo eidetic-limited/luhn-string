@@ -15,7 +15,7 @@ function reverse(s) {
 function aordinal(str, validChars) {
   var val = validChars.indexOf(str);
   
-  return {error: (val===-1) ? new Error(str + ' is not a valid digit.') : null, result: val};
+  return {error: (val===-1) ? new Error(str + ' is not a valid digit. Expected one of "'+validChars.split('').join(', ')+'"') : null, result: val};
 }
 
 function bordinal(inte, validChars) {
@@ -243,10 +243,31 @@ function addChecksum(r, callbackOrChars, callback) {
   }
 }
 
-module.exports = {
-  check: check,
-  addChecksum: addChecksum,
-  cryptoRandomAsciiString: randomAsciiString,
-  cryptoRandomString: randomString,
-  random: random
+var LuhnObject = function(validChars){
+  if(typeof validChars !== 'string'){
+    throw new Error('validChars must be a string containing all valid characters in sequence');
+  } else if(validChars.length <= 1){
+    throw new Error('validChars must contain at least 2 characters in sequence');
+  }
+  
+  this.check = function(str, callback){
+    return check(str, validChars, callback);
+  };
+  this.addChecksum = function(str, callback){
+    return addChecksum(str, validChars, callback);
+  };
+  this.random = function(length, callback){
+    return random(length, validChars, callback);
+  };
+  this.cryptoRandomString = function(length){
+    return randomString(length, validChars);
+  };
 };
+
+LuhnObject.check= check;
+LuhnObject.addChecksum= addChecksum;
+LuhnObject.cryptoRandomAsciiString= randomAsciiString;
+LuhnObject.cryptoRandomString= randomString;
+LuhnObject.random= random;
+
+module.exports = LuhnObject;
