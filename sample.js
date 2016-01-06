@@ -31,7 +31,7 @@ console.log(Luhn.check(res, '0123456789'));
 var creator = new Luhn('0123456789');
 res = creator.random(16);
 console.log(res);
-console.log(Luhn.check(res, '0123456789'));
+console.log(creator.check(res));
 
 // Method 1 requires that you send the validchar array every time, however, with Method 2, 
 // you may call it along with the require or for each random string generator you need
