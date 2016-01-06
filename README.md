@@ -39,7 +39,7 @@ console.log(Luhn.check(res, '0123456789'));
 var creator = new Luhn('0123456789');
 res = creator.random(16);
 console.log(res);
-console.log(Luhn.check(res, '0123456789'));
+console.log(creator.check(res));
 
 
 // to test a string for checksum validity
