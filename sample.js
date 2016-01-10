@@ -5,7 +5,7 @@
 var Luhn = require('./luhn-string');
 var chars='UYSHO*(EKJDGuihsdk8aBAzZ', len;
 
-// Now you can validate against a LuhnObject created by calling
+// Now you can validate against a LuhnString created by calling
 // the module with a string including the sequence you want.
 // Examples are below
 
@@ -70,7 +70,6 @@ var chk = Luhn.check('DW9S91FJLR24V5Z');
 var valid = chk.result;
 var validityerror = chk.error;
 
-// Take advantage of asynchrous processing!
 // Use callbacks
 Luhn.random(16, function(error, result){
   if(error){

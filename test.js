@@ -140,8 +140,8 @@ describe('addChecksum', function() {
 
 });
 
-describe('LuhnObject', function() {
-  it('should fail to instantiate a new LuhnObject object when invalid \'validchars\' are not sent', function() {
+describe('LuhnString', function() {
+  it('should fail to instantiate a new LuhnString object when invalid \'validchars\' are not sent', function() {
     expect(function(){var r = new Luhn();}).to.throw();
     expect(function(){var r = new Luhn(123456789);}).to.throw();
     expect(function(){var r = new Luhn('');}).to.throw();
